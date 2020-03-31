@@ -1,5 +1,5 @@
 
-const BASE_URL = "127.0.0.1";
+const BASE_URL = "http://localhost:8080";
 
 // axios 默认配置
 const AXIOS_DEFAULT_CONFIG = {

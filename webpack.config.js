@@ -1,12 +1,19 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const apiMocker = require("mocker-api");
+
 module.exports = {
+  entry: ['@babel/polyfill', './src/index.ts'],
   devServer: {
     port: 8080,
     clientLogLevel: "none",
-    historyApiFallback: true
+    historyApiFallback: true,
+    before(app) {
+      apiMocker(app, path.resolve("./mock/index.ts"));
+    }
   },
+  devtool: 'inline-source-map',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src/")
@@ -18,20 +25,20 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-              '@babel/preset-typescript',
-            ],
-            plugins: [
-              ["@babel/plugin-proposal-decorators", { "legacy": true }],
-              ["@babel/plugin-proposal-class-properties", { "loose": false }]
-            ]
-          }
+        use: [{
+            loader: 'babel-loader'
         }
-      },
+        ,{
+            loader: 'ts-loader',
+            options: {
+            transpileOnly: true,
+            appendTsSuffixTo: ['\\.vue$'],
+            happyPackMode: true
+            }
+        }
+        ]
+    }
+     ,
       { test: /\.vue$/, loader: 'vue-loader' }
     ]
   },
