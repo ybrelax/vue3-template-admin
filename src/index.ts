@@ -1,12 +1,15 @@
 import Vue from 'vue';
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+import '@/styles/index.less';
+
 import App from "./App.vue";
 import router from "./router";
 
-const name:string = '234';
-class person {
-   name:string = 'yaobo'
-}
-console.log(new person().name)
+Vue.use(ElementUI);
+
 new Vue({
   router,
   render: h => h(App)

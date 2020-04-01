@@ -12,11 +12,11 @@
   "dependencies": {
     "@babel/polyfill": "^7.8.7",
     "axios": "^0.19.2",
+    "element-ui": "^2.13.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",
     "vue-property-decorator": "^8.4.1",
-    "vue-router": "^3.1.6",
-    "vuex": "^3.1.3"
+    "vue-router": "^3.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -24,13 +24,23 @@
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
+    "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.0.3",
+    "less": "^3.11.1",
+    "less-loader": "^5.0.0",
     "mocker-api": "^1.13.1",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^1.1.3",
     "ts-loader": "^6.2.2",
     "typescript": "^3.8.3",
+    "url-loader": "^4.0.0",
     "vue-loader": "^15.9.1",
     "vue-template-compiler": "^2.6.11",
+    "vuex": "^3.1.3",
+    "vuex-module-decorators": "^0.16.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"

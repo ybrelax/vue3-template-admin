@@ -1,4 +1,4 @@
-## react的一个自定义SAP脚手架
+## 基于Webpack自定义的后台Vue框架
 
 ### 使用：
 ```js
@@ -9,4 +9,4 @@ npm run start
 * Vue技术栈
 * 集成Typescript
 * 集成axios，丰富拦截机制
-* 
+* 集成Vuex,增加状态管理
