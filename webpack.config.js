@@ -10,7 +10,7 @@ module.exports = {
     clientLogLevel: "none",
     historyApiFallback: true,
     before(app) {
-      apiMocker(app, path.resolve("./mock/index.ts"));
+      apiMocker(app, path.resolve("./mock/index.js"));
     }
   },
   devtool: "inline-source-map",
@@ -54,7 +54,8 @@ module.exports = {
                 });
               }
             }
-          }
+          },
+          'less-loader'
         ]
       },
       {
