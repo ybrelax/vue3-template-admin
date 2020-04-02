@@ -1,12 +1,23 @@
+
+/** Layout */
+import Layout from "@/layout/index.vue";
+
 const routes =  [
   {
     path: "/",
     name: "home",
+    component: Layout,
     meta: {
       title: "首页",
       icon: ""
     },
-    component: () => import("@/views/dashboard/index.vue")
+    children: [
+      {
+        path: '/',
+        component: () => import("@/views/dashboard/index.vue")
+      }
+    ],
+    
   },
   {
     path: "/login",

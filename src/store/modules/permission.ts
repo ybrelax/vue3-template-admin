@@ -1,4 +1,4 @@
-import { Module, Mutation, VuexModule, Action } from "vuex-module-decorators";
+import { Module, Mutation, VuexModule, Action, getModule } from "vuex-module-decorators";
 import { RouteConfig } from "vue-router";
 import { constantRoutes, asyncRoutes } from "@/router";
 import store from "@/store";
@@ -48,4 +48,4 @@ class Permission extends VuexModule implements IPermissionState {
   }
 }
 
-export default Permission;
+export const PermissionModule = getModule(Permission);

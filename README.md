@@ -10,3 +10,4 @@ npm run start
 * 集成Typescript
 * 集成axios，丰富拦截机制
 * 集成Vuex,增加状态管理
+* 集成mock 数据

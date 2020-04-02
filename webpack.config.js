@@ -1,10 +1,17 @@
 const path = require("path");
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const apiMocker = require("mocker-api");
 
 module.exports = {
-  entry: ["@babel/polyfill", "./src/index.ts"],
+  entry: ["./src/index.ts"],
+  output: {
+    path: path.resolve(__dirname, "build"), //必须是绝对路径
+    filename: "[name].[hash:6].js",
+    publicPath: "/" //通常是CDN地址
+  },
+
   devServer: {
     port: 8080,
     clientLogLevel: "none",
@@ -75,6 +82,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html"
     }),

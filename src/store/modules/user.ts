@@ -40,12 +40,16 @@ class User extends VuexModule implements IUserState {
     let { username, password } = userInfo;
     username = username.trim();
     const {data} = await login({ username, password });
-    console.log('data:', data)
     if (!data) {
       return false;
     } else {
       return true;
     }
+  }
+
+  @Action
+  public async GetUserInfo() {
+
   }
 }
 
