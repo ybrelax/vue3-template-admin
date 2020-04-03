@@ -2,7 +2,7 @@
 
 项目展示：
 
-[登录](./screenshot.png)
+![login](./screenshot.png)
 
 ### 使用：
 ```js
