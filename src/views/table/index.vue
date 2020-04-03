@@ -13,7 +13,6 @@ export default class Dashboard extends Vue {
   private name:string = '2343';
 
   mounted() {
-    console.log("页面加载完成");
     this.getRoleInfo();
   }
  
@@ -24,10 +23,6 @@ export default class Dashboard extends Vue {
       return "hello world";
     };
 
-    f().then(v => console.log(v));
-    console.log(12);
-    const info  = await fetch('http://localhost:8080/get/roles').then((res:any) => res.json());
-     console.log("currRole:", currRole, info);
   }
 
 }

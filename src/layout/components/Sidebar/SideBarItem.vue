@@ -1,15 +1,19 @@
 <template>
-  <div v-if="!route.meta">
-    {{theOnlyOneChild}}
+  <div v-if="!route.meta || !route.meta.hidden">
     <template v-if="theOnlyOneChild">
-      <el-menu-item :index="route.meta.path">{{route.meta.title}}</el-menu-item>
+      <router-link :to="resolvePath(theOnlyOneChild.path)">
+        <el-menu-item :index="theOnlyOneChild.path">{{
+          theOnlyOneChild.meta.title
+        }}</el-menu-item>
+      </router-link>
     </template>
-    <el-submenu v-else>
+    <el-submenu v-else :index="route.path">
       <span slot="title">{{ route.meta.title }}</span>
       <sidebar-item
         v-for="child in route.children"
         :key="child.path"
         :route="child"
+        :base-path="route.path"
         class="nest-menu"
       />
     </el-submenu>
@@ -17,6 +21,7 @@
 </template>
 
 <script lang="ts">
+import path from 'path';
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Route, RouteConfig } from "vue-router";
 
@@ -25,10 +30,7 @@ import { Route, RouteConfig } from "vue-router";
 })
 export default class extends Vue {
   @Prop({ required: true }) private route!: RouteConfig;
-
-  mounted() {
-    console.log("router123:", this.route.path, this.route.meta , this.theOnlyOneChild);
-  }
+  @Prop({ default: "" }) private basePath!: string;
 
   get showingChildNumber() {
     if (this.route.children) {
@@ -43,19 +45,36 @@ export default class extends Vue {
 
   get theOnlyOneChild() {
     if (this.showingChildNumber > 1) {
-      console.log('这里')
       return false;
     }
     if (this.route.children) {
       for (let child of this.route.children) {
-        console.log('xxx:',)
         if (!child.meta || !child.meta.hidden) {
-          console.log("child:", child);
           return child;
         }
       }
     }
-    return { ...this.route, path: "" };
+    return { ...this.route };
+  }
+
+  private resolvePath(routePath: string) {
+    return path.resolve(this.basePath, routePath)
   }
 }
 </script>
+
+<style lang="less">
+.el-submenu.is-active > .el-submenu__title {
+  color: @subMenuActiveText !important;
+}
+
+.el-submenu > .el-submenu__title,
+.el-submenu .el-menu-item {
+  min-width: @sideBarWidth !important;
+  background-color: @subMenuBg !important;
+
+  &:hover {
+    background-color: @subMenuHover !important;
+  }
+}
+</style>

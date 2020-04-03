@@ -39,21 +39,28 @@ class User extends VuexModule implements IUserState {
   public async Login(userInfo: { username: string; password: string }) {
     let { username, password } = userInfo;
     username = username.trim();
-    const {data} = await login({ username, password });
-    const {token, name} = data;
+    const { data } = await login({ username, password });
+    const { token, name } = data;
     this.SET_TOKEN(token);
     this.SET_NAME(name);
   }
 
   @Action
   public async GetUserInfo() {
-    if (this.token === '') {
-      throw Error('GetUserInfo: token is undefined!')
+    if (this.token === "") {
+      throw Error("GetUserInfo: token is undefined!");
     }
-    const { data } = await getUserInfo({ /* Your params here */ })
-    console.log('roles:', data)
-    const {roles} = data;
-    this.SET_ROLES(roles)
+    const { data } = await getUserInfo({
+      /* Your params here */
+    });
+    const { roles } = data;
+    this.SET_ROLES(roles);
+  }
+
+  @Action
+  public async LogOut() {
+    this.SET_TOKEN("");
+    this.SET_ROLES([]);
   }
 }
 

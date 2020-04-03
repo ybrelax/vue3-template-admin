@@ -14,7 +14,10 @@ import Layout from "@/layout/index.vue";
 export const constantRoutes: RouteConfig[] = [
   {
     path: "/login",
-    component: () => import("@/views/login/index.vue")
+    component: () => import("@/views/login/index.vue"),
+    meta: {
+      hidden: true
+    }
   },
   {
     path: "/",
@@ -41,25 +44,33 @@ export const asyncRoutes: RouteConfig[] = [
   {
     path: "/setting",
     component: Layout,
-    redirect: '/guide/index',
+    redirect: '/setting-page-one',
     meta: {
       title: '设置',
     },
     children: [
       {
-        path: "index",
+        path: "setting-page-one",
         name: 'Setting',
         component: () => import("@/views/setting/index.vue"),
         meta: {
-          title: '多页面',
+          title: '多页面1',
         }
       },
       {
-        path: "index",
-        name: 'Setting1',
+        path: "setting-page-two",
+        name: 'Setting2',
         component: () => import("@/views/setting/index.vue"),
         meta: {
-          title: '多页面1',
+          title: '多页面2',
+        }
+      },
+      {
+        path: "setting-page-three",
+        name: 'Setting3',
+        component: () => import("@/views/setting/index.vue"),
+        meta: {
+          title: '多页面3',
         }
       }
     ]

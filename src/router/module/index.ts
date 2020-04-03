@@ -13,7 +13,7 @@ const routes =  [
     },
     children: [
       {
-        path: '/',
+        path: 'dashboard',
         component: () => import("@/views/dashboard/index.vue")
       }
     ],
@@ -24,6 +24,7 @@ const routes =  [
     name: "login",
     meta: {
       title: "登录",
+      meta: { hidden: true }
     },
     component: () => import("@/views/login/index.vue")
   }

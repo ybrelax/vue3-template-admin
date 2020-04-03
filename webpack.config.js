@@ -1,5 +1,5 @@
 const path = require("path");
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const apiMocker = require("mocker-api");
@@ -25,7 +25,7 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "src/")
     },
-    extensions: [".ts", ".js", ".json", ".vue"]
+    extensions: [".ts", ".js", ".json", ".vue", ".less"]
   },
   module: {
     rules: [
@@ -62,23 +62,29 @@ module.exports = {
               }
             }
           },
-          'less-loader'
+          "less-loader",
+          {
+            loader: "style-resources-loader",
+            options: {
+              patterns: path.resolve(__dirname, "./src/styles/index.less")
+            }
+          }
         ]
       },
       {
         test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
         use: [
-            {
-                loader: 'url-loader',
-                options: {
-                    limit: 10240, //10K
-                    esModule: false,
-                    name: '[name]_[hash:6].[ext]',
-                    outputPath: 'assets'
-                }
+          {
+            loader: "url-loader",
+            options: {
+              limit: 10240, //10K
+              esModule: false,
+              name: "[name]_[hash:6].[ext]",
+              outputPath: "assets"
             }
-        ],
-     }
+          }
+        ]
+      }
     ]
   },
   plugins: [

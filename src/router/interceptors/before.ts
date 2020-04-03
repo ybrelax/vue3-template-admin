@@ -20,7 +20,7 @@ export default async (to: Route, _: Route, next: any) => {
         PermissionModule.GenerateRoutes(roles);
         router.addRoutes(PermissionModule.dynamicRoutes);
 
-        next({ ...to, replace: true });
+        next();
       } else {
         next();
       }
