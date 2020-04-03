@@ -14,7 +14,11 @@ module.exports = {
 
   devServer: {
     port: 8080,
+    inline: true,
+    stats: "errors-only",
     clientLogLevel: "none",
+    clientLogLevel: "silent",
+    compress: true,
     historyApiFallback: true,
     before(app) {
       apiMocker(app, path.resolve("./mock/index.js"));

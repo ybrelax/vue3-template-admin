@@ -10,7 +10,7 @@ import { getRoles } from "@/apis/roles";
 
 @Component
 export default class Dashboard extends Vue {
-  private name:string = '2343';
+  private name:string = '2343333';
 
   mounted() {
     this.getRoleInfo();
@@ -18,10 +18,6 @@ export default class Dashboard extends Vue {
  
 
   async getRoleInfo() {
-    const currRole =  await getRoles();
-    const f = async () => {
-      return "hello world";
-    };
 
   }
 

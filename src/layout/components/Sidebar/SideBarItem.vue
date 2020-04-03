@@ -32,7 +32,7 @@ export default class extends Vue {
   @Prop({ required: true }) private route!: RouteConfig;
   @Prop({ default: "" }) private basePath!: string;
 
-  get showingChildNumber() {
+  get showingChildNumber() { 
     if (this.route.children) {
       const showingChildNumber = this.route.children.filter(
         item => !(item.meta && item.meta.hidden)
