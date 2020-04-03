@@ -6,7 +6,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/index.less';
 
 import App from "./App.vue";
+
+/** add router */
 import router from "./router";
+import "@/router/interceptors";
 
 Vue.use(ElementUI);
 

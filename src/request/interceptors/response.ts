@@ -11,7 +11,6 @@ export function responseSuccessFunc(response:AxiosResponse) {
     Message.error(data.data.message);
     return {};
   }
-  console.log('response:', response.data)
   return response.data;
 }
 

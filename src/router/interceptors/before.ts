@@ -11,15 +11,19 @@ export default async (to: Route, _: Route, next: any) => {
     if (to.path === "/login") {
       next({ path: "/" });
     } else {
-      // check user permission
-      await UserModule.GetUserInfo();
-      const roles = UserModule.roles;
+      if (UserModule.roles.length === 0) {
+        // check user permission
+        await UserModule.GetUserInfo();
+        const roles = UserModule.roles;
 
-      // generate accessible routes based on role
-      PermissionModule.GenerateRoutes(roles);
-      router.addRoutes(PermissionModule.dynamicRoutes);
+        // generate accessible routes based on role
+        PermissionModule.GenerateRoutes(roles);
+        router.addRoutes(PermissionModule.dynamicRoutes);
 
-      next({ ...to, replace: true });
+        next({ ...to, replace: true });
+      } else {
+        next();
+      }
     }
   } else {
     /**

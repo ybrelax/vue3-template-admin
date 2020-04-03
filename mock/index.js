@@ -1,11 +1,19 @@
 module.exports = {
-  "GET /get/roles": {
-    id: 1,
-    username: "ybrelax",
-    sex: '1',
-    role: 'admin'
+  "POST /get/userInfo": (req, res) => {
+
+    return res.json({
+      status: 'ok',
+      code: 0,
+      data: {
+        id: 1,
+        username: "ybrelax",
+        sex: '1',
+        roles: ['admin']
+      }
+    })
   },
-  "POST /users/login": (req, res) =>  {
+
+  "POST /users/login": (req, res) => {
     const { password, username } = req.body;
     if (password === '123456' && username == 'admin') {
       return res.json({
@@ -13,8 +21,7 @@ module.exports = {
         code: 0,
         data: {
           id: 1,
-          username: 'ybrelax',
-          roles: 'admin'
+          token: '123456'
         }
       })
     } else {
@@ -26,6 +33,6 @@ module.exports = {
         }
       })
     }
-   
+
   }
 };

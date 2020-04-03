@@ -24,7 +24,10 @@ export const constantRoutes: RouteConfig[] = [
       {
         path: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
-        name: "Dashboard"
+        name: "Dashboard",
+        meta: {
+          title: '首页'
+        }
       }
     ]
   }
@@ -39,11 +42,25 @@ export const asyncRoutes: RouteConfig[] = [
     path: "/setting",
     component: Layout,
     redirect: '/guide/index',
+    meta: {
+      title: '设置',
+    },
     children: [
       {
         path: "index",
         name: 'Setting',
-        component: () => import("@/views/setting/index.vue")
+        component: () => import("@/views/setting/index.vue"),
+        meta: {
+          title: '多页面',
+        }
+      },
+      {
+        path: "index",
+        name: 'Setting1',
+        component: () => import("@/views/setting/index.vue"),
+        meta: {
+          title: '多页面1',
+        }
       }
     ]
   }

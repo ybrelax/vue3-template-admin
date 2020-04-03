@@ -74,12 +74,10 @@ export default class extends Vue {
       if (valid) {
         this.loading = true;
 
-        const result = await UserModule.Login(this.loginForm);
-        if (result) {
-          this.$router.push({
-            path: "/"
-          });
-        }
+        await UserModule.Login(this.loginForm);
+        this.$router.push({
+          path: "/"
+        });
         this.loading = false;
       }
     });

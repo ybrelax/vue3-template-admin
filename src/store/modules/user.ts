@@ -5,7 +5,7 @@ import {
   Action,
   getModule
 } from "vuex-module-decorators";
-import { login } from "@/apis/users";
+import { login, getUserInfo } from "@/apis/users";
 import store from "@/store";
 
 export interface IUserState {
@@ -40,16 +40,20 @@ class User extends VuexModule implements IUserState {
     let { username, password } = userInfo;
     username = username.trim();
     const {data} = await login({ username, password });
-    if (!data) {
-      return false;
-    } else {
-      return true;
-    }
+    const {token, name} = data;
+    this.SET_TOKEN(token);
+    this.SET_NAME(name);
   }
 
   @Action
   public async GetUserInfo() {
-
+    if (this.token === '') {
+      throw Error('GetUserInfo: token is undefined!')
+    }
+    const { data } = await getUserInfo({ /* Your params here */ })
+    console.log('roles:', data)
+    const {roles} = data;
+    this.SET_ROLES(roles)
   }
 }
 

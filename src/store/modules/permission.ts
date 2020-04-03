@@ -44,6 +44,7 @@ class Permission extends VuexModule implements IPermissionState {
   @Action
   public GenerateRoutes(roles: string[]) {
     let accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
+    console.log('accessedRoutes:', accessedRoutes)
     this.SET_ROUTES(accessedRoutes)
   }
 }
