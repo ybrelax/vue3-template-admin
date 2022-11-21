@@ -1,9 +1,8 @@
 {
     "printWidth": 100,
-    "tabWidth": 4,
+    "tabWidth": 2,
     "useTabs": false,
     "semi": true,
-    "vueIndentScriptAndStyle": true,
     "singleQuote": true,
     "quoteProps": "as-needed",
     "bracketSpacing": true,
@@ -11,6 +10,7 @@
     "arrowParens": "always",
     "insertPragma": false,
     "requirePragma": false,
+    "vueIndentScriptAndStyle": true,
     "proseWrap": "never",
     "htmlWhitespaceSensitivity": "strict",
     "endOfLine": "auto"
