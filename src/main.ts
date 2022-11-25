@@ -1,4 +1,6 @@
 import 'virtual:windi.css';
+import 'ant-design-vue/dist/antd.variable.less';
+import '@/design/index.less';
 import { createApp } from 'vue';
 import store from './store';
 import './style.css';

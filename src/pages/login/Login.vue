@@ -1,7 +1,9 @@
 <template>
   <div :class="prefixCls" class="relative w-full h-full px-4">
     <div class="flex items-center absolute right-4 top-4"> </div>
-    <span class="-enter-x xl:hidden"> </span>
+    <span class="-enter-x xl:hidden">
+      <AppLogo :alwaysShowTitle="true" />
+    </span>
   </div>
 </template>
 <script lang="ts" setup>

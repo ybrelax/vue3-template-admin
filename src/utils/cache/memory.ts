@@ -77,4 +77,11 @@ export class Memory<T = any, V = any> {
     });
     this.cache = {};
   }
+  clear() {
+    Object.keys(this.cache).forEach((key) => {
+      const item = this.cache[key];
+      item.timeoutId && clearTimeout(item.timeoutId);
+    });
+    this.cache = {};
+  }
 }

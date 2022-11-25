@@ -1,6 +1,16 @@
 import type { GlobEnvConfig } from '#/config';
+import pkg from '../../package.json';
 import { getConfigFileName } from '../../build/getConfigFileName';
 import { warn } from './log';
+
+export function getCommonStoragePrefix() {
+  const { VITE_GLOB_APP_SHORT_NAME } = getAppEnvConfig();
+  return `${VITE_GLOB_APP_SHORT_NAME}__${getEnv}`.toUpperCase();
+}
+
+export function getStorageShortName() {
+  return `${getCommonStoragePrefix()}${`__${pkg.version}`}__`.toUpperCase();
+}
 
 export const getAppEnvConfig = () => {
   const ENV_NAME = getConfigFileName(import.meta.env);
@@ -29,3 +39,19 @@ export const getAppEnvConfig = () => {
     VITE_GLOB_UPLOAD_URL
   };
 };
+
+/**
+ * 判断是否为开发环境
+ * @returns
+ */
+export function isDevMode(): boolean {
+  return import.meta.env.DEV;
+}
+
+/**
+ * 获取环境变量
+ * @returns
+ */
+export function getEnv() {
+  return import.meta.env.MODE;
+}

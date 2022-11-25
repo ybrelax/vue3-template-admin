@@ -1,3 +1,27 @@
+import { CacheTypeEnum } from '@/enums/cacheEnum';
+
+export interface MenuSetting {
+  bgColor: string;
+  fixed: boolean;
+  collapsed: boolean;
+  siderHidden: boolean;
+  canDrag: boolean;
+  show: boolean;
+  hidden: boolean;
+  split: boolean;
+  menuWidth: number;
+  mode: MenuModeEnum;
+  type: MenuTypeEnum;
+  theme: ThemeEnum;
+  topMenuAlign: 'start' | 'center' | 'end';
+  trigger: TriggerEnum;
+  accordion: boolean;
+  closeMixSidebarOnChange: boolean;
+  collapsedShowTitle: boolean;
+  mixSideTrigger: MixSidebarTriggerEnum;
+  mixSideFixed: boolean;
+}
+
 export interface GlobConfig {
   title: string;
   apiUrl: string;
@@ -17,4 +41,11 @@ export interface GlobEnvConfig {
   VITE_GLOB_APP_SHORT_NAME: string;
   // 上传地址
   VITE_GLOB_UPLOAD_URL?: string;
+}
+
+export interface ProjectConfig {
+  // 权限缓存类型
+  permissionCacheType: CacheTypeEnum;
+  // 菜单设置
+  menuSetting: MenuSetting;
 }

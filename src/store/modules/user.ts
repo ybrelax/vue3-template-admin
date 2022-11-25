@@ -1,4 +1,6 @@
 import type { UserInfo } from '#/user';
+import { TOKEN_KEY, USER_INFO_KEY, ROLES_KEY } from '@/enums/cacheEnum';
+import { getAuthCache } from '@/utils/auth';
 import { defineStore } from 'pinia';
 import { RoleEnum } from '../../enums/roleEnum';
 
@@ -23,7 +25,19 @@ export const useUserStore = defineStore({
   },
   getters: {
     getUserInfo(): UserInfo {
-      return this.userInfo;
+      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY);
+    },
+    getToken(): string {
+      return this.token || getAuthCache<string>(TOKEN_KEY);
+    },
+    getRoleList(): RoleEnum[] {
+      return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY);
+    },
+    getSessionTimeout(): boolean {
+      return !!this.sessionTimeout;
+    },
+    getLastUpdateTime(): number {
+      return this.lastUpdateTime;
     }
   },
   actions: {

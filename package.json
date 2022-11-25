@@ -13,6 +13,7 @@
     "prettier": "prettier --write src"
   },
   "dependencies": {
+    "@ant-design/colors": "^6.0.0",
     "@vueuse/core": "^9.5.0",
     "ant-design-vue": "3.3.0-beta.3",
     "axios": "^1.1.3",

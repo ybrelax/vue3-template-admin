@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
     AMonthPicker: typeof import('ant-design-vue/es')['MonthPicker']
+    AppLogo: typeof import('./src/components/Application/src/AppLogo.vue')['default']
     AppProvider: typeof import('./src/components/Application/src/AppProvider.vue')['default']
     ARangePicker: typeof import('ant-design-vue/es')['RangePicker']
     ASpace: typeof import('ant-design-vue/es')['Space']

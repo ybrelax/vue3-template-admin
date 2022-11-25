@@ -4,6 +4,7 @@ import windiCSS from 'vite-plugin-windicss';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import vue from '@vitejs/plugin-vue';
+import { generateModifyVars } from './build/generate/generateModifyVars';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,6 +21,14 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '#': path.resolve(__dirname, 'types')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        modifyVars: generateModifyVars(),
+        javascriptEnabled: true
+      }
     }
   },
   server: {

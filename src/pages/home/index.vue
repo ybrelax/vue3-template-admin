@@ -9,43 +9,43 @@
   />
 </template>
 <script lang="ts">
-import { Moment } from 'moment';
-import { defineComponent, ref } from 'vue';
-export default defineComponent({
-  setup() {
-    const dates = ref<Moment[]>([]);
-    const value = ref<Moment[]>();
+  import { Moment } from 'moment';
+  import { defineComponent, ref } from 'vue';
+  export default defineComponent({
+    setup() {
+      const dates = ref<Moment[]>([]);
+      const value = ref<Moment[]>();
 
-    const disabledDate = (current: Moment) => {
-      if (!dates.value || dates.value.length === 0) {
-        return false;
-      }
-      const diffDate = current.diff(dates.value[0], 'days');
-      return Math.abs(diffDate) > 7;
-    };
+      const disabledDate = (current: Moment) => {
+        if (!dates.value || dates.value.length === 0) {
+          return false;
+        }
+        const diffDate = current.diff(dates.value[0], 'days');
+        return Math.abs(diffDate) > 7;
+      };
 
-    const onOpenChange = (open: boolean) => {
-      if (open) {
-        dates.value = [];
-      }
-    };
+      const onOpenChange = (open: boolean) => {
+        if (open) {
+          dates.value = [];
+        }
+      };
 
-    const onChange = (val: Moment[]) => {
-      value.value = val;
-    };
+      const onChange = (val: Moment[]) => {
+        value.value = val;
+      };
 
-    const onCalendarChange = (val: Moment[]) => {
-      dates.value = val;
-    };
+      const onCalendarChange = (val: Moment[]) => {
+        dates.value = val;
+      };
 
-    return {
-      dates,
-      value,
-      disabledDate,
-      onOpenChange,
-      onChange,
-      onCalendarChange
-    };
-  }
-});
+      return {
+        dates,
+        value,
+        disabledDate,
+        onOpenChange,
+        onChange,
+        onCalendarChange
+      };
+    }
+  });
 </script>
