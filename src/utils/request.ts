@@ -1,39 +1,77 @@
+import type { AxiosInstance, AxiosRequestConfig } from 'axios';
+import type { RequestOptions } from '#/axios';
 import axios from 'axios';
-import { BaseUrl } from '../constants/config';
+import { cloneDeep } from 'lodash-es';
+import { notification } from 'ant-design-vue';
+import { ContentTypeEnum, StatusEnum } from '@/enums/requestEnum';
+import { getToken } from './auth';
 
-// axios 实例
-const request = axios.create({
-  baseURL: BaseUrl,
-  timeout: 50000,
-  headers: {
-    'Content-Type': 'application/json'
+interface CreateAxiosOptions extends AxiosRequestConfig {
+  requestOptions?: RequestOptions;
+}
+
+const baseRequestConfig: AxiosRequestConfig = {
+  baseURL: import.meta.env.VITE_GLOB_API_URL_PREFIX,
+  timeout: 10 * 1000,
+  headers: { 'Content-Type': ContentTypeEnum.JSON }
+};
+
+class AxiosRequest {
+  private axiosInstance: AxiosInstance;
+  private readonly options: CreateAxiosOptions;
+
+  constructor(options: CreateAxiosOptions) {
+    this.options = options;
+    this.axiosInstance = axios.create(options);
+    this.setupInterceptors();
   }
-});
 
-// 添加请求拦截器
-axios.interceptors.request.use(
-  function (config) {
-    // 在发送请求之前做些什么
-    return config;
-  },
-  function (error) {
-    // 对请求错误做些什么
-    return Promise.reject(error);
+  // 启动相应拦截器
+  private setupInterceptors() {
+    // 请求拦截器
+    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+      const token = getToken();
+      if (token) {
+        (config as Record<string, any>).headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
   }
-);
 
-// 添加响应拦截器
-axios.interceptors.response.use(
-  function (response) {
-    // 2xx 范围内的状态码都会触发该函数。
-    // 对响应数据做点什么
-    return response;
-  },
-  function (error) {
-    // 超出 2xx 范围的状态码都会触发该函数。
-    // 对响应错误做点什么
-    return Promise.reject(error);
+  public request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+    const conf: CreateAxiosOptions = cloneDeep(config);
+
+    const { requestOptions } = this.options;
+    const opt: RequestOptions = Object.assign({}, requestOptions, options);
+    conf.requestOptions = opt;
+
+    return new Promise((resolve, reject) => {
+      this.axiosInstance
+        .request(conf)
+        .then(({ data }) => {
+          if (data.code === StatusEnum.SUCCESS) {
+            resolve(data?.data);
+          } else {
+            notification.error({
+              message: '错误提示',
+              description: data.message || '网络异常，请检查您的网络连接是否正常!'
+            });
+            reject(new Error(data.message));
+          }
+        })
+        .catch((res) => {
+          notification.error({
+            message: '错误提示',
+            description: res.message || '网络异常，请检查您的网络连接是否正常!'
+          });
+          console.error(res);
+          reject(res);
+        });
+    });
   }
-);
+}
 
-export default request;
+const instance = new AxiosRequest(baseRequestConfig);
+
+export default (config: AxiosRequestConfig, options?: RequestOptions) =>
+  instance.request(config, options);

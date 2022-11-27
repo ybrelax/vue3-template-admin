@@ -1,6 +1,6 @@
 <template>
   <div class="action" :class="getAppLogoClass" @click="goHome">
-    <img src="../../../assets/images/logo.png" />
+    <img src="../../../assets/images/logo.svg" />
     <div v-show="showTitle" class="m-2 truncate md:opacity-100" :class="getTitleClass">
       {{ title }}
     </div>

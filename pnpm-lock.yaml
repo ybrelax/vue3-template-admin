@@ -15,6 +15,7 @@ specifiers:
   eslint-plugin-prettier: ^4.2.1
   eslint-plugin-vue: ^9.7.0
   less: ^4.1.3
+  lodash-es: ^4.17.21
   pinia: ^2.0.24
   prettier: ^2.7.1
   typescript: ^4.6.3
@@ -31,6 +32,7 @@ dependencies:
   ant-design-vue: registry.npmmirror.com/ant-design-vue/3.3.0-beta.3_vue@3.2.45
   axios: registry.npmmirror.com/axios/1.1.3
   crypto-js: registry.npmmirror.com/crypto-js/4.1.1
+  lodash-es: registry.npmmirror.com/lodash-es/4.17.21
   pinia: registry.npmmirror.com/pinia/2.0.24_uqdvkhiw7d6fxymkdsclnbmiti
   vue: registry.npmmirror.com/vue/3.2.45
   vue-router: registry.npmmirror.com/vue-router/4.1.6_vue@3.2.45

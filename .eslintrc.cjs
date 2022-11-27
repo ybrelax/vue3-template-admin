@@ -34,6 +34,7 @@ module.exports = {
         ignores: ['index'] //需要忽略的组件名
       }
     ],
+    'vue/attributes-order': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'vue/attribute-hyphenation': 'off',
     'vue/require-default-prop': 'off',

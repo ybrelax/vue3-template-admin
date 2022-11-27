@@ -1,8 +1,11 @@
 import type { UserInfo } from '#/user';
 import { TOKEN_KEY, USER_INFO_KEY, ROLES_KEY } from '@/enums/cacheEnum';
-import { getAuthCache } from '@/utils/auth';
+import { getAuthCache, setAuthCache } from '@/utils/auth';
+import { login as loginApi, getUserInfo } from '@/apis/index';
 import { defineStore } from 'pinia';
 import { RoleEnum } from '../../enums/roleEnum';
+import router from '@/router';
+import { PageEnum } from '@/enums/pageEnum';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -14,7 +17,7 @@ interface UserState {
 
 export const useUserStore = defineStore({
   id: 'app-user',
-  state: () => {
+  state: (): UserState => {
     return {
       userInfo: null,
       token: undefined,
@@ -25,7 +28,7 @@ export const useUserStore = defineStore({
   },
   getters: {
     getUserInfo(): UserInfo {
-      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY);
+      return this.userInfo || getAuthCache<UserInfo>(USER_INFO_KEY) || {};
     },
     getToken(): string {
       return this.token || getAuthCache<string>(TOKEN_KEY);
@@ -41,8 +44,41 @@ export const useUserStore = defineStore({
     }
   },
   actions: {
-    // updateName(name: string) {
-    //   this.name = name;
-    // }
+    setToken(info: string | undefined) {
+      this.token = info ? info : '';
+      setAuthCache(TOKEN_KEY, info);
+    },
+    setUserInfo(info: UserInfo | null) {
+      this.userInfo = info;
+      this.lastUpdateTime = new Date().getTime();
+      setAuthCache(USER_INFO_KEY, info);
+    },
+    /**
+     * 登陆
+     */
+    async login(params: API.LoginParams) {
+      const data = await loginApi(params);
+      const { token } = data;
+      this.setToken(token);
+      return this.afterLocationAction();
+    },
+    async afterLocationAction() {
+      if (!this.getToken) return null;
+      const userInfo = await this.getUserInfoAction();
+      return userInfo;
+    },
+    async getUserInfoAction(): Promise<UserInfo | null> {
+      if (!this.getToken) return null;
+      const userInfo = await getUserInfo();
+      return userInfo;
+    },
+    /**
+     * 登出
+     */
+    async logout(goLogin = false) {
+      this.setToken(undefined);
+      this.setUserInfo(null);
+      goLogin && router.push(PageEnum.BASE_LOGIN);
+    }
   }
 });

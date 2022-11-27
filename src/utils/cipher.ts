@@ -1,4 +1,4 @@
-import { encrpt, decrpt } from 'crypto-js/aes';
+import { encrypt, decrypt } from 'crypto-js/aes';
 import { parse } from 'crypto-js/enc-utf8';
 import ECB from 'crypto-js/mode-ecb';
 import pkcs7 from 'crypto-js/pad-pkcs7';
@@ -33,11 +33,11 @@ export class AesEncryption {
   }
 
   encryptByAES(cipherText: string) {
-    return encrpt(cipherText, this.key, this.getOptions).toString();
+    return encrypt(cipherText, this.key, this.getOptions).toString();
   }
 
   decrptByAES(cipherText: string) {
-    return decrpt(cipherText, this.key, this.getOptions).toString(UTF8);
+    return decrypt(cipherText, this.key, this.getOptions).toString(UTF8);
   }
 }
 

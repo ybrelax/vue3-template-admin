@@ -9,7 +9,8 @@ import {
   PROJ_CFG_KEY,
   APP_LOCAL_CACHE_KEY,
   APP_SESSION_CACHE_KEY,
-  MULTIPLE_TABS_KEY
+  MULTIPLE_TABS_KEY,
+  REMBER_ME_KEY
 } from '@/enums/cacheEnum';
 import { createLocalStorage, createSessionStorage } from '.';
 import { Memory } from './memory';
@@ -23,6 +24,7 @@ interface BasicStore {
   [LOCK_INFO_KEY]: LockInfo;
   [PROJ_CFG_KEY]: ProjectConfig;
   [MULTIPLE_TABS_KEY]: RouteLocationNormalized[];
+  [REMBER_ME_KEY]: Record<string, string | number>;
 }
 
 export type BasicKeys = keyof BasicStore;
@@ -40,7 +42,15 @@ const sessionMemory = new Memory(DEFAULT_CACHE_TIME);
 
 export class Persistent {
   static getLocal<T>(key: LocalKeys) {
-    return localMemory.get(key)?.value as Nullable<T>;
+    let value = localMemory.get(key)?.value as Nullable<T>;
+    if (!value) {
+      const cacheValue = ls.get(APP_LOCAL_CACHE_KEY);
+      if (cacheValue) {
+        localMemory.setCache(cacheValue);
+        value = localMemory.get(key)?.value as Nullable<T>;
+      }
+    }
+    return value;
   }
 
   static setLocal(key: LocalKeys, value: LocalStore[LocalKeys], immediate = false): void {

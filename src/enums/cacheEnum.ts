@@ -15,6 +15,8 @@ export const APP_DARK_MODE_KEY_ = '__APP__DARK__MODE__';
 
 export const MULTIPLE_TABS_KEY = 'MULTIPLE_TABS__KEY__';
 
+export const REMBER_ME_KEY = 'REMBER_ME_KEY__';
+
 export enum CacheTypeEnum {
   SESSION,
   LOCAL

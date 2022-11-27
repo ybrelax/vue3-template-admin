@@ -17,3 +17,7 @@ export function isNullAndUnDef(val: unknown): val is null | undefined {
 export function isNullOrUnDef(val: unknown): val is null | undefined {
   return isUnDef(val) && isNull(val);
 }
+
+export function isFunction(val: unknown): val is (...arg) => unknown {
+  return typeof val === 'function';
+}

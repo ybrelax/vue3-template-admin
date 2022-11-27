@@ -15,6 +15,7 @@ declare module '@vue/runtime-core' {
     ASpace: typeof import('ant-design-vue/es')['Space']
     ATree: typeof import('ant-design-vue/es')['Tree']
     AWeekPicker: typeof import('ant-design-vue/es')['WeekPicker']
+    Dropdown: typeof import('./src/components/Dropdown/src/Dropdown.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
