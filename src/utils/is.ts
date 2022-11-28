@@ -21,3 +21,8 @@ export function isNullOrUnDef(val: unknown): val is null | undefined {
 export function isFunction(val: unknown): val is (...arg) => unknown {
   return typeof val === 'function';
 }
+
+export function isUrl(path: string): boolean {
+  const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+  return reg.test(path);
+}

@@ -1,3 +1,4 @@
+import { PermissionModeEnum } from '@/enums/appEnum';
 import { CacheTypeEnum } from '@/enums/cacheEnum';
 
 export type LocaleType = 'zh_CN' | 'en' | 'ru' | 'ja' | 'ko';
@@ -50,4 +51,6 @@ export interface ProjectConfig {
   permissionCacheType: CacheTypeEnum;
   // 菜单设置
   menuSetting: MenuSetting;
+  // 权限模式
+  permissionMode: PermissionModeEnum
 }
